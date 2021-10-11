@@ -1,0 +1,11 @@
+<resources>
+    <string name="app_name">MyAge</string>
+    <string name="txt_title">Minha idade</string>
+    <string name="txt_name">Qual é o seu nome?</string>
+    <string name="hint_name">Insira o seu nome</string>
+    <string name="txt_birthyear">Em que ano você nasceu?</string>
+    <string name="hint_birthyear">Insira o ano em que você nasceu</string>
+    <string name="btn_age_calc">Calcular</string>
+    <string name="btn_new_calc">Novo Cálculo</string>
+    <string name="btn_logout">Sair</string>
+</resources>
