@@ -1,7 +1,8 @@
-package foo.myage
+package foo.myage.view
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import foo.myage.R
 
 class SplashActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {

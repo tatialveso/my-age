@@ -1,12 +1,13 @@
-package foo.myage
+package foo.myage.view
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.view.View
 import android.widget.Button
 import android.widget.EditText
 import android.widget.TextView
-import android.widget.Toast
+import foo.myage.R
+import foo.myage.controller.PersonController
+import foo.myage.model.Person
 import java.time.LocalDate
 
 class MainActivity : AppCompatActivity() {
@@ -17,6 +18,8 @@ class MainActivity : AppCompatActivity() {
     lateinit var btnNewCalc: Button
     lateinit var txtResult: TextView
     lateinit var btnLogout: Button
+    lateinit var person: Person
+    lateinit var personController: PersonController
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -33,19 +36,37 @@ class MainActivity : AppCompatActivity() {
         btnNewCalc = findViewById(R.id.btnNewCalc)
         txtResult = findViewById(R.id.txtResult)
         btnLogout = findViewById(R.id.btnLogout)
+        person = Person()
+        personController = PersonController(person)
 
         txtResult.setText("")
     }
 
     private fun initButtonClick() {
         btnAgeCalc.setOnClickListener {
-            val personName = editPersonName.text
-            val birthYear = editBirthYear.text.toString().toInt()
-            val thisYear = LocalDate.now().year
+            var validation = true
 
-            val age = thisYear - birthYear
+            if(editPersonName.text.isEmpty()) {
+                validation = false
+                editPersonName.setError("Campo obrigatório!")
+                editPersonName.requestFocus()
+            }
+            if(editBirthYear.text.isEmpty()) {
+                validation = false
+                editBirthYear.setError("Campo obrigatório!")
+                editBirthYear.requestFocus()
+            }
 
-            txtResult.setText("$personName, você tem $age anos de idade")
+            if(validation) {
+                var firstName = editPersonName.text.toString()
+                val birthYear = editBirthYear.text.toString().toInt()
+                person.firstName = firstName
+                person.birthYear = birthYear
+
+                val age = personController.calcAgeInYears()
+
+                txtResult.setText("${person.firstName}, você tem $age anos de vida.")
+            }
         }
 
         btnNewCalc.setOnClickListener {
